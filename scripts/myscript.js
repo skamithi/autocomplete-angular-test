@@ -4,7 +4,7 @@
     .module('MyApp', ['ngMaterial'])
     .controller('AutoComplete', AutoComplete);
 
-  function AutoComplete($timeout, $q, $log) {
+  function AutoComplete() {
     var self = this;
     /* querySearch is run each time you type a word in the autocomplete text
      * field
