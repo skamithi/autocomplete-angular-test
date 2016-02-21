@@ -5,9 +5,30 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet"
     href="bower_components/angular-material/angular-material.min.css" type="text/css" media="screen" charset="utf-8">
-    <title> testing angular material </title>
+    <link rel="stylesheet"
+    href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <title> Doing autocompletion button using Angular Material and Bootstrap </title>
   </head>
   <body ng-app="MyApp">
+    <div class="container">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <h4> Testing Autocomplete Forms with Angular Material</h4>
+        <hr/>
+        <form ng-submit="$event.preventDefault()" ng-controller="AutoComplete as ac">
+          <md-autocomplete md-select-item="ac.selectedItem" md-search-text="ac.searchText"
+          md-items="item in ac.querySearch(ac.searchText)"
+          md-item-text="item.display"
+          placeholder="Enter State">
+            <span md-highlight-text="ac.searchText">{{item.display}}</span>
+          <md-not-found>
+            No states matching "{{ ac.searchText}}" were found
+          </md-not-found>
+          </md-autocomplete>
+        </form>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
     <script src="bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js" type="text/javascript" charset="utf-8"></script>
