@@ -2,10 +2,23 @@
   'use strict';
   angular
     .module('MyApp', ['ngMaterial'])
+/*    .config(function($mdThemingProvider) {
+      $mdThemingProvider.theme('default')
+      .primaryPalette('pink')
+      .accentPalette('orange');
+    })*/
     .controller('AutoComplete', AutoComplete);
 
-  function AutoComplete() {
+  function AutoComplete($http, $log) {
     var self = this;
+    /* autocomplete_data_loaded: if set to true hide label
+    */
+    self.dataLoaded = true;
+    /* by default the input field is in a disabled state
+     * it stays in a red color as well.
+     * when the api call succeeds, remove the red color and enable the form
+     */
+    self.isDisabled = true;
     /* querySearch is run each time you type a word in the autocomplete text
      * field
      */
@@ -13,23 +26,44 @@
     /* define where you get the list to autocomplete against. In this case we
      * cover something locally defined..No API call
      */
-    self.states = loadAll();
+    loadAll();
+    self.placeholder = "Enter Country Name";
 
+    /* populate autocomplete data struct */
+    /* create a object array with one of the object attributes being "display".
+     * The other values can be used for search and for sending back to server
+     * via API. 'value' is what is put in the input value field
+     * name is used for the search
+     * This is what md-autocomplete is looking for. For example
+     * { data: Object, value: "united states", display: "United States"},
+     * { data: Object, value: "canada", display: "United States" }
+     */
+    function populateAutocomplete(data) {
+      self.states = _.map(data, function(entry) {
+        return {
+          display: entry.name,
+          value: entry,
+          search_value: angular.lowercase(entry.name)
+        }
+      });
+      self.isDisabled = false;
+    }
+
+    /* loadAll countries from a API */
     function loadAll() {
-      var allStates = 'Alabama, Alaska'
-      return allStates.split(/, +/g).map(
-        function(state) {
-          return {
-            value: state.toLowerCase(),
-            display: state
-        };
+      var responsePromise = $http.get("https://restcountries.eu/rest/v1/all");
+      responsePromise.success(function(data, status, headers, config) {
+        populateAutocomplete(data);
+      });
+      responsePromise.error(function(data, status, headers, config) {
+        $log.info('failed to load');
       });
     }
 
     function createFilterFor(query) {
       var lowercaseQuery = angular.lowercase(query);
       return function filterFn(state) {
-        return (state.value.indexOf(lowercaseQuery) === 0);
+        return (state.search_value.indexOf(lowercaseQuery) === 0);
       }
     }
 

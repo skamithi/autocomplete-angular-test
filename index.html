@@ -7,28 +7,55 @@
     href="bower_components/angular-material/angular-material.min.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet"
     href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
-    <title> Doing autocompletion button using Angular Material and Bootstrap </title>
+    <style>
+
+    .make_progress_bar_thinner {
+      height: 2px;
+    }
+    </style>
+    <title> Testing Autocompletion using Angular Material </title>
   </head>
   <body ng-app="MyApp">
     <div class="container">
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <h4> Testing Autocomplete Forms with Angular Material</h4>
+        <h4> Country Database </h4>
         <hr/>
-        <form ng-submit="$event.preventDefault()" ng-controller="AutoComplete as ac">
-          <md-autocomplete md-select-item="ac.selectedItem" md-search-text="ac.searchText"
-          md-items="item in ac.querySearch(ac.searchText)"
-          md-item-text="item.display"
-          placeholder="Enter State">
-            <span md-highlight-text="ac.searchText">{{item.display}}</span>
-          <md-not-found>
-            No states matching "{{ ac.searchText}}" were found
-          </md-not-found>
+        <p>
+        Type in a country's name and some basic details about that country.
+        </p>
+        <form
+          ng-submit="$event.preventDefault()"
+          ng-controller="AutoComplete as ac"
+          ng-cloak>
+
+        <md-progress-linear
+            ng-hide='dataLoaded'
+            class='make_progress_bar_thinner ng-hide'
+            md-mode='query'>
+          </md-progress-linear>
+
+          <md-autocomplete
+            md-select-item="ac.selectedItem"
+            md-search-text="ac.searchText"
+            md-items="item in ac.querySearch(ac.searchText)"
+            md-item-text="item.display"
+            ng-disabled="ac.isDisabled"
+            placeholder="{{ac.placeholder}}">
+              <md-item-template>
+              <span md-highlight-text="ac.searchText">{{item.display}}</span>
+              </md-item-template>
+              <md-not-found>
+                No states matching {{ac.searchText}}" were found
+              </md-not-found>
           </md-autocomplete>
+
         </form>
       </div>
       <div class="col-md-4"></div>
     </div>
+    <script src="bower_components/underscore/underscore-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js" type="text/javascript" charset="utf-8"></script>

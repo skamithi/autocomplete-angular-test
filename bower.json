@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "angular-material": "^1.0.5",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "SVG-Loaders": "svg-loaders#^1.0.2"
   }
 }
