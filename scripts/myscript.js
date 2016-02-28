@@ -7,7 +7,13 @@
       .primaryPalette('pink')
       .accentPalette('orange');
     })*/
-    .controller('AutoComplete', AutoComplete);
+    .controller('AutoComplete', AutoComplete)
+    .filter('capitalize', function() {
+      return function(input, all) {
+        var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
+        return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+    }
+  });
 
   function AutoComplete($http, $log) {
     var self = this;
@@ -29,6 +35,12 @@
     loadAll();
     self.placeholder = "Enter Country Name";
 
+    function capitalExists(){
+      if (self.selectedItem && self.selectedItem.value.capital === '') {
+        return false;
+      }
+      return true;
+    }
     /* populate autocomplete data struct */
     /* create a object array with one of the object attributes being "display".
      * The other values can be used for search and for sending back to server
@@ -43,10 +55,12 @@
         return {
           display: entry.name,
           value: entry,
+          flagImage: 'country-flags/svg/' + angular.lowercase(entry.alpha2Code) + '.svg',
           search_value: angular.lowercase(entry.name)
         }
       });
       self.isDisabled = false;
+      self.dataLoaded = true;
     }
 
     /* loadAll countries from a API */

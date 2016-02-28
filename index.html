@@ -3,56 +3,129 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+
     <link rel="stylesheet"
     href="bower_components/angular-material/angular-material.min.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet"
     href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <style>
+      /* style for title "Country Database" */
+      h2.title {
+        font-size: 40px;
+        padding-bottom: 0.5em;
+        border-bottom: 2px solid black;
+        text-align: center;
+      }
+      /* set the size of the country flag to cover the whole section carved out
+      for it */
+      .country.flag {
+        position: relative;
+      }
+      .country.flag img {
+        height: 100%;
+        width: 100%;
+      }
+      .country.details.stats td.name {
+        font-weight: bold;
+      }
+      /* only works for Chrome.. haven't done the others yet */
+      ::-webkit-input-placeholder {
+        color: #666;
+      }
+      .make_darker_form_border {
+        background: linear-gradient(to bottom, #FEFEFE, #EFEFEF);
+      }
 
-    .make_progress_bar_thinner {
-      height: 2px;
+      /* change linear direction on hover*/
+      .make_darker_form_border:hover {
+         background: linear-gradient(to top, #FEFEFE, #EFEFEF);
+      }
+      /* bar showing that country api is loading is a little too thick
+      make it thinner
+      */
+      .make_progress_bar_thinner {
+        height: 2px;
     }
     </style>
-    <title> Testing Autocompletion using Angular Material </title>
+    <title> Testing Autocompletion using Angular Material - Country Database </title>
   </head>
   <body ng-app="MyApp">
-    <div class="container">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <h4> Country Database </h4>
-        <hr/>
-        <p>
-        Type in a country's name and some basic details about that country.
-        </p>
-        <form
-          ng-submit="$event.preventDefault()"
-          ng-controller="AutoComplete as ac"
-          ng-cloak>
+    <div class="container" ng-controller="AutoComplete as ac">
+      <div class='col-md-2'></div>
+      <div class='col-md-8'>
 
-        <md-progress-linear
-            ng-hide='dataLoaded'
-            class='make_progress_bar_thinner ng-hide'
-            md-mode='query'>
-          </md-progress-linear>
+        <!-- header layout define as 12 column so you can do nested columns -->
+        <div class='header_layout col-md-12'>
+          <div class='col-md-2'></div>
+          <div class='col-md-8'>
+            <h2 class='title'> Country Database </h2>
+          </div>
+          <div class='col-md-2'></div>
+        </div>
 
-          <md-autocomplete
-            md-select-item="ac.selectedItem"
-            md-search-text="ac.searchText"
-            md-items="item in ac.querySearch(ac.searchText)"
-            md-item-text="item.display"
-            ng-disabled="ac.isDisabled"
-            placeholder="{{ac.placeholder}}">
-              <md-item-template>
-              <span md-highlight-text="ac.searchText">{{item.display}}</span>
-              </md-item-template>
-              <md-not-found>
-                No states matching {{ac.searchText}}" were found
-              </md-not-found>
-          </md-autocomplete>
+        <!-- form layout  define as 12 col so you can do nested columns -->
+        <div class='form_layout col-md-12'>
+          <div class="col-md-3"></div>
+          <div class="col-md-6" >
+            <form
+              ng-submit="$event.preventDefault()"
+              ng-cloak>
+              <md-progress-linear
+                  ng-hide='ac.dataLoaded'
+                  class='make_progress_bar_thinner ng-hide'
+                  md-mode='query'>
+                </md-progress-linear>
 
-        </form>
+                <md-autocomplete
+                  class='make_darker_form_border'
+                  md-selected-item="ac.selectedItem"
+                  md-search-text="ac.searchText"
+                  md-items="item in ac.querySearch(ac.searchText)"
+                  md-item-text="item.display"
+                  ng-disabled="ac.isDisabled"
+                  placeholder="{{ac.placeholder}}">
+                    <md-item-template>
+                    <span md-highlight-text="ac.searchText">{{item.display}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No states matching {{ac.searchText}}" were found
+                    </md-not-found>
+                </md-autocomplete>
+            </form>
+          </div>
+          <div ng-if="ac.selectedItem" class="country col-md-12">
+            <div class="name_and_flag col-md-12">
+              <div class="name col-md-8"> <h3> {{
+                  ac.selectedItem.value.name }}</h3></div>
+              <!--
+              <div ng-if="capitalExists" class="flag col-md-4"><img
+                src="{{ ac.selectedItem.flagImage }}"/></div>
+-->
+            </div>
+            <div class="details col-md-12">
+              <div class="stats col-md-8">
+                <table class="table">
+                  <tbody>
+                    <tr ng-repeat="n in ['capital', 'population']">
+                      <td class='name'>
+                        {{ n | capitalize}}
+                      </td>
+                      <td class='value'>
+                        {{ ac.selectedItem.value[n] }}
+                      </td>
+                    </tr>
+                  <tbody>
+                </table>
+              </div>
+              <div class="map col-md-4">
+              </div>
+            </div>
+            {{ ac.selectedItem }}
+          </div>
+          <div class="col-md-3"></div>
+        </div>
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-2"></div>
     </div>
     <script src="bower_components/underscore/underscore-min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
