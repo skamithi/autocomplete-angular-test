@@ -46,6 +46,11 @@
      * { data: Object, value: "canada", display: "United States" }
      */
     function populateAutocomplete(data) {
+      var pplScale = new humanFormat.Scale({
+        'hundred': 100,
+        'thousand': 10000,
+        'million': 1000000})
+
       self.states = _.map(data, function(entry) {
         if (!entry.capital) {
            entry.capital = 'Not Available';
@@ -53,6 +58,8 @@
         } else {
            entry.flagImage = 'country-flags/svg/' + angular.lowercase(entry.alpha2Code) + '.svg';
         }
+        entry.population_int = entry.population;
+        entry.population = humanFormat(entry.population, { scale: pplScale});
         return {
           display: entry.name,
           value: entry,

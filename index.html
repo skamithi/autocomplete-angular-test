@@ -8,10 +8,16 @@
     href="bower_components/angular-material/angular-material.min.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet"
     href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat'
+    rel='stylesheet' type='text/css'>
     <style>
+      body {
+        font-size: 3em;
+        font-family: 'Monserrat', san-serif;
+      }
       /* style for title "Country Database" */
       h2.title {
-        font-size: 40px;
+        font-size: 2em;
         padding-bottom: 0.5em;
         border-bottom: 2px solid black;
         text-align: center;
@@ -28,7 +34,7 @@
 
       }
       .country .name h3 {
-        font-size: 3em;
+        font-size: 2em;
       }
       /* set the size of the country flag to cover the whole section carved out
       for it */
@@ -53,12 +59,15 @@
       ::-webkit-input-placeholder {
         color: #666;
       }
-      .make_darker_form_border {
+      .input_autocomplete {
         background: linear-gradient(to bottom, #FEFEFE, #EFEFEF);
+      }
+      .input_autocomplete input {
+        color: #000444;
       }
 
       /* change linear direction on hover*/
-      .make_darker_form_border:hover {
+      .input_autocomplete:hover {
          background: linear-gradient(to top, #FEFEFE, #EFEFEF);
       }
       /* bar showing that country api is loading is a little too thick
@@ -98,7 +107,7 @@
                 </md-progress-linear>
 
                 <md-autocomplete
-                  class='make_darker_form_border'
+                  class='input_autocomplete'
                   md-selected-item="ac.selectedItem"
                   md-search-text="ac.searchText"
                   md-items="item in ac.querySearch(ac.searchText)"
@@ -126,7 +135,7 @@
             <div class="stats col-md-8">
               <table class="table">
                 <tbody>
-                  <tr ng-repeat="n in ['capital', 'population']">
+                  <tr ng-repeat="n in ['capital', 'population', 'region', 'subregion']">
                     <td class='name'>
                       {{ n | capitalize}}
                     </td>
@@ -151,6 +160,7 @@
     <script src="bower_components/angular-animate/angular-animate.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-material/angular-material.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components/human-format/index.js" type="text/javascript" charset="utf-8"></script>
     <script src="scripts/myscript.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>

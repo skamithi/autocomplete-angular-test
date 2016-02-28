@@ -18,6 +18,8 @@
   "dependencies": {
     "angular-material": "^1.0.5",
     "bootstrap": "^3.3.6",
-    "SVG-Loaders": "svg-loaders#^1.0.2"
+    "SVG-Loaders": "svg-loaders#^1.0.2",
+    "humanize": "^0.0.9",
+    "human-format": "^0.6.0"
   }
 }
