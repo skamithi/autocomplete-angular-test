@@ -18,14 +18,14 @@
       }
       /* set the size of the country flag to cover the whole section carved out
       for it */
-      .country.flag {
+      .country .flag {
         position: relative;
       }
-      .country.flag img {
+      .country .flag img {
         height: 100%;
         width: 100%;
       }
-      .country.details.stats td.name {
+      .country .details .stats td.name {
         font-weight: bold;
       }
       /* only works for Chrome.. haven't done the others yet */
@@ -97,10 +97,8 @@
             <div class="name_and_flag col-md-12">
               <div class="name col-md-8"> <h3> {{
                   ac.selectedItem.value.name }}</h3></div>
-              <!--
-              <div ng-if="capitalExists" class="flag col-md-4"><img
-                src="{{ ac.selectedItem.flagImage }}"/></div>
--->
+              <div class="flag col-md-4"><img
+                ng-src="{{ ac.selectedItem.flagImage }}"/></div>
             </div>
             <div class="details col-md-12">
               <div class="stats col-md-8">

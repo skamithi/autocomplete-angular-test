@@ -19,6 +19,7 @@
     var self = this;
     /* autocomplete_data_loaded: if set to true hide label
     */
+    self.capitalExists = true;
     self.dataLoaded = true;
     /* by default the input field is in a disabled state
      * it stays in a red color as well.
@@ -35,12 +36,6 @@
     loadAll();
     self.placeholder = "Enter Country Name";
 
-    function capitalExists(){
-      if (self.selectedItem && self.selectedItem.value.capital === '') {
-        return false;
-      }
-      return true;
-    }
     /* populate autocomplete data struct */
     /* create a object array with one of the object attributes being "display".
      * The other values can be used for search and for sending back to server
