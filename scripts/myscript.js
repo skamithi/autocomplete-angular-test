@@ -47,10 +47,15 @@
      */
     function populateAutocomplete(data) {
       self.states = _.map(data, function(entry) {
+        if (!entry.capital) {
+           entry.capital = 'Not Available';
+           entry.flagImage = 'country-flags/svg/flag_of_none.svg';
+        } else {
+           entry.flagImage = 'country-flags/svg/' + angular.lowercase(entry.alpha2Code) + '.svg';
+        }
         return {
           display: entry.name,
           value: entry,
-          flagImage: 'country-flags/svg/' + angular.lowercase(entry.alpha2Code) + '.svg',
           search_value: angular.lowercase(entry.name)
         }
       });

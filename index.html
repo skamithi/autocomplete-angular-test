@@ -16,6 +16,20 @@
         border-bottom: 2px solid black;
         text-align: center;
       }
+      .country {
+        margin-top: 2em;
+        padding-top: 1em;
+        border: 10px solid #fff;
+        border-top: 1px solid #777;
+        border-left: 1px solid #777;
+        -webkit-box-shadow: 3px 3px 3px #777;
+        -moz-box-shadow: 3px 3px 3px #777;
+        box-shadow: 3px 3px 3px #777;
+
+      }
+      .country .name h3 {
+        font-size: 3em;
+      }
       /* set the size of the country flag to cover the whole section carved out
       for it */
       .country .flag {
@@ -24,6 +38,13 @@
       .country .flag img {
         height: 100%;
         width: 100%;
+        border: 10px solid #fff;
+        -webkit-box-shadow: 3px 3px 3px #777;
+        -moz-box-shadow: 3px 3px 3px #777;
+        box-shadow: 3px 3px 3px #777;
+      }
+      .country .details {
+        margin-top: 2em;
       }
       .country .details .stats td.name {
         font-weight: bold;
@@ -93,35 +114,34 @@
                 </md-autocomplete>
             </form>
           </div>
-          <div ng-if="ac.selectedItem" class="country col-md-12">
-            <div class="name_and_flag col-md-12">
-              <div class="name col-md-8"> <h3> {{
-                  ac.selectedItem.value.name }}</h3></div>
-              <div class="flag col-md-4"><img
-                ng-src="{{ ac.selectedItem.flagImage }}"/></div>
-            </div>
-            <div class="details col-md-12">
-              <div class="stats col-md-8">
-                <table class="table">
-                  <tbody>
-                    <tr ng-repeat="n in ['capital', 'population']">
-                      <td class='name'>
-                        {{ n | capitalize}}
-                      </td>
-                      <td class='value'>
-                        {{ ac.selectedItem.value[n] }}
-                      </td>
-                    </tr>
-                  <tbody>
-                </table>
-              </div>
-              <div class="map col-md-4">
-              </div>
-            </div>
-            {{ ac.selectedItem }}
-          </div>
-          <div class="col-md-3"></div>
         </div>
+        <div ng-if="ac.selectedItem" class="country col-md-12">
+          <div class="name_and_flag col-md-12">
+            <div class="name col-md-8"> <h3> {{
+                ac.selectedItem.value.name }}</h3></div>
+            <div class="flag col-md-4"><img
+              ng-src="{{ ac.selectedItem.value.flagImage }}"/></div>
+          </div>
+          <div class="details col-md-12">
+            <div class="stats col-md-8">
+              <table class="table">
+                <tbody>
+                  <tr ng-repeat="n in ['capital', 'population']">
+                    <td class='name'>
+                      {{ n | capitalize}}
+                    </td>
+                    <td class='value'>
+                      {{ ac.selectedItem.value[n] }}
+                    </td>
+                  </tr>
+                <tbody>
+              </table>
+            </div>
+            <div class="map col-md-4">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
       </div>
       <div class="col-md-2"></div>
     </div>
