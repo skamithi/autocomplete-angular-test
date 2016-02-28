@@ -1,0 +1,67 @@
+body {
+  font-size: 24px;
+  font-family: 'Monserrat', san-serif;
+}
+/* style for title "Country Database" */
+h2.title {
+  font-size: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+.country {
+  margin-top: 2em;
+  padding-top: 1em;
+  border: 10px solid #fff;
+  border-top: 1px solid #777;
+  border-left: 1px solid #777;
+  -webkit-box-shadow: 3px 3px 3px #777;
+  -moz-box-shadow: 3px 3px 3px #777;
+  box-shadow: 3px 3px 3px #777;
+
+}
+.country .name h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+/* set the size of the country flag to cover the whole section carved out
+for it */
+.country .flag {
+  position: relative;
+}
+.country .flag img {
+  height: 100%;
+  width: 100%;
+  border: 10px solid #fff;
+  -webkit-box-shadow: 3px 3px 3px #777;
+  -moz-box-shadow: 3px 3px 3px #777;
+  box-shadow: 3px 3px 3px #777;
+}
+.country .details {
+  margin-top: 2em;
+}
+.country .details .stats td.name {
+  font-weight: bold;
+}
+/* only works for Chrome.. haven't done the others yet */
+::-webkit-input-placeholder {
+  color: #666;
+}
+.input_autocomplete {
+  background: linear-gradient(to bottom, #FEFEFE, #EFEFEF);
+}
+.input_autocomplete input {
+  color: #000444;
+}
+
+/* change linear direction on hover*/
+.input_autocomplete:hover {
+   background: linear-gradient(to top, #FEFEFE, #EFEFEF);
+}
+/* bar showing that country api is loading is a little too thick
+make it thinner
+*/
+.make_progress_bar_thinner {
+  height: 2px;
+}
+

@@ -10,82 +10,17 @@
     href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Montserrat'
     rel='stylesheet' type='text/css'>
-    <style>
-      body {
-        font-size: 3em;
-        font-family: 'Monserrat', san-serif;
-      }
-      /* style for title "Country Database" */
-      h2.title {
-        font-size: 2em;
-        padding-bottom: 0.5em;
-        border-bottom: 2px solid black;
-        text-align: center;
-      }
-      .country {
-        margin-top: 2em;
-        padding-top: 1em;
-        border: 10px solid #fff;
-        border-top: 1px solid #777;
-        border-left: 1px solid #777;
-        -webkit-box-shadow: 3px 3px 3px #777;
-        -moz-box-shadow: 3px 3px 3px #777;
-        box-shadow: 3px 3px 3px #777;
-
-      }
-      .country .name h3 {
-        font-size: 2em;
-      }
-      /* set the size of the country flag to cover the whole section carved out
-      for it */
-      .country .flag {
-        position: relative;
-      }
-      .country .flag img {
-        height: 100%;
-        width: 100%;
-        border: 10px solid #fff;
-        -webkit-box-shadow: 3px 3px 3px #777;
-        -moz-box-shadow: 3px 3px 3px #777;
-        box-shadow: 3px 3px 3px #777;
-      }
-      .country .details {
-        margin-top: 2em;
-      }
-      .country .details .stats td.name {
-        font-weight: bold;
-      }
-      /* only works for Chrome.. haven't done the others yet */
-      ::-webkit-input-placeholder {
-        color: #666;
-      }
-      .input_autocomplete {
-        background: linear-gradient(to bottom, #FEFEFE, #EFEFEF);
-      }
-      .input_autocomplete input {
-        color: #000444;
-      }
-
-      /* change linear direction on hover*/
-      .input_autocomplete:hover {
-         background: linear-gradient(to top, #FEFEFE, #EFEFEF);
-      }
-      /* bar showing that country api is loading is a little too thick
-      make it thinner
-      */
-      .make_progress_bar_thinner {
-        height: 2px;
-    }
-    </style>
+    <link rel="stylesheet" href="css/my.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <title> Testing Autocompletion using Angular Material - Country Database </title>
   </head>
   <body ng-app="MyApp">
+    <!-- bootstrap container -->
     <div class="container" ng-controller="AutoComplete as ac">
       <div class='col-md-2'></div>
       <div class='col-md-8'>
-
         <!-- header layout define as 12 column so you can do nested columns -->
         <div class='header_layout col-md-12'>
+          <!-- header layout -->
           <div class='col-md-2'></div>
           <div class='col-md-8'>
             <h2 class='title'> Country Database </h2>
@@ -104,9 +39,9 @@
                   ng-hide='ac.dataLoaded'
                   class='make_progress_bar_thinner ng-hide'
                   md-mode='query'>
-                </md-progress-linear>
+              </md-progress-linear>
 
-                <md-autocomplete
+              <md-autocomplete
                   class='input_autocomplete'
                   md-selected-item="ac.selectedItem"
                   md-search-text="ac.searchText"
@@ -115,27 +50,32 @@
                   ng-disabled="ac.isDisabled"
                   placeholder="{{ac.placeholder}}">
                     <md-item-template>
-                    <span md-highlight-text="ac.searchText">{{item.display}}</span>
+                      <span md-highlight-text="ac.searchText">{{item.display}}</span>
                     </md-item-template>
                     <md-not-found>
                       No states matching {{ac.searchText}}" were found
                     </md-not-found>
-                </md-autocomplete>
+              </md-autocomplete>
             </form>
           </div>
         </div>
         <div ng-if="ac.selectedItem" class="country col-md-12">
+          <!-- country details, flag name and stats -->
           <div class="name_and_flag col-md-12">
-            <div class="name col-md-8"> <h3> {{
-                ac.selectedItem.value.name }}</h3></div>
-            <div class="flag col-md-4"><img
-              ng-src="{{ ac.selectedItem.value.flagImage }}"/></div>
+            <div class="name col-md-8">
+              <h3> {{ac.selectedItem.value.name }}</h3>
+            </div>
+            <div class="flag col-md-4">
+              <!-- picture of the flag -->
+              <img ng-src="{{ ac.selectedItem.value.flagImage }}"/>
+            </div>
           </div>
           <div class="details col-md-12">
             <div class="stats col-md-8">
               <table class="table">
                 <tbody>
                   <tr ng-repeat="n in ['capital', 'population', 'region', 'subregion']">
+                    <!-- repeat td blocks for various country stats -->
                     <td class='name'>
                       {{ n | capitalize}}
                     </td>
@@ -143,14 +83,12 @@
                       {{ ac.selectedItem.value[n] }}
                     </td>
                   </tr>
-                <tbody>
+                </tbody>
               </table>
             </div>
-            <div class="map col-md-4">
-            </div>
+            <div class="map col-md-4"></div>
           </div>
         </div>
-        <div class="col-md-3"></div>
       </div>
       <div class="col-md-2"></div>
     </div>
