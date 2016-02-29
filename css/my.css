@@ -3,12 +3,14 @@ body {
   font-family: 'Monserrat', san-serif;
 }
 /* style for title "Country Database" */
-h2.title {
+.header h2.title {
   font-size: 1em;
   padding-bottom: 0.5em;
   border-bottom: 2px solid black;
   text-align: center;
 }
+/* Set a space between the Country database form and the country details
+Create a shadow around it */
 .country {
   margin-top: 2em;
   padding-top: 1em;
@@ -20,15 +22,20 @@ h2.title {
   box-shadow: 3px 3px 3px #777;
 
 }
+
+/* Make the name of the country in the shadow bold */
 .country .name h3 {
   font-size: 1.5em;
   font-weight: bold;
 }
+
 /* set the size of the country flag to cover the whole section carved out
 for it */
 .country .flag {
   position: relative;
 }
+/* Set the size of the flag image. build a shadow box around it
+*/
 .country .flag img {
   height: 100%;
   width: 100%;
@@ -64,4 +71,3 @@ make it thinner
 .make_progress_bar_thinner {
   height: 2px;
 }
-
