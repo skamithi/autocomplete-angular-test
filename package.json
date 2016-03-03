@@ -28,6 +28,7 @@
     "grunt-cli": "^0.1.13",
     "grunt-contrib-coffee": "^1.0.0",
     "grunt-protractor-runner": "^3.0.0",
+    "grunt-protractor-webdriver": "^0.2.5",
     "karma": "^0.13.21",
     "karma-chai": "^0.1.0",
     "karma-cli": "^0.1.2",
