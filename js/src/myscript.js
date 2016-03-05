@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   angular
-    .module('MyApp', ['ngMaterial'])
+    .module('MyApp', ['ngMaterial', 'ngStorage'])
 /*    .config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
       .primaryPalette('pink')
@@ -15,12 +15,12 @@
     }
   });
 
-  function AutoComplete($http, $log) {
+  function AutoComplete($http, $localStorage) {
     var self = this;
     /* autocomplete_data_loaded: if set to true hide label
     */
     self.capitalExists = true;
-    self.dataLoaded = true;
+    self.dataLoaded = false;
     /* by default the input field is in a disabled state
      * it stays in a red color as well.
      * when the api call succeeds, remove the red color and enable the form
@@ -33,8 +33,13 @@
     /* define where you get the list to autocomplete against. In this case we
      * cover something locally defined..No API call
      */
+    if ($localStorage.lastCountryFound){
+      self.selectedItem = $localStorage.lastCountryFound;
+    }
     loadAll();
     self.placeholder = "Enter Country Name";
+
+    self.selectedItemChange = selectedItemChange;
 
     /* populate autocomplete data struct */
     /* create a object array with one of the object attributes being "display".
@@ -92,6 +97,10 @@
       var results = query ? self.states.filter(
         createFilterFor(query)) : self.states, deferred;
       return results;
+    }
+
+    function selectedItemChange(item) {
+      $localStorage.lastCountryFound = item;
     }
   }
 })();

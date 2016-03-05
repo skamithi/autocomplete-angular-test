@@ -47,6 +47,7 @@
                   md-items="item in ac.querySearch(ac.searchText)"
                   md-item-text="item.display"
                   ng-disabled="ac.isDisabled"
+                  md-selected-item-change="ac.selectedItemChange(item)"
                   placeholder="{{ac.placeholder}}">
                     <md-item-template>
                       <span md-highlight-text="ac.searchText">{{item.display}}</span>
@@ -88,13 +89,16 @@
             <div class="map col-md-4"></div>
           </div>
         </div>
+        <div class='cookie test'>
+          cookie
+          {{ ac.lastCountryFound }}
+        </div>
       </div>
       <div class="col-md-2"></div>
     </div>
-
     <script src="bower_components/underscore/underscore-min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components/ngstorage/ngStorage.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components/angular-material/angular-material.min.js" type="text/javascript" charset="utf-8"></script>
