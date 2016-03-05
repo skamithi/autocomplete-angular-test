@@ -3,7 +3,7 @@ body {
   font-family: 'Monserrat', san-serif;
 }
 /* style for title "Country Database" */
-.header h2.title {
+.header h2 {
   font-size: 1em;
   padding-bottom: 0.5em;
   border-bottom: 2px solid black;
